@@ -1,0 +1,110 @@
+{
+  "name": "frp-bypass-professional-gui",
+  "version": "1.0.0",
+  "description": "Interface gráfica para FRP Bypass Professional",
+  "main": "src/main.js",
+  "homepage": "./",
+  "scripts": {
+    "start": "electron .",
+    "dev": "concurrently \"npm run react-dev\" \"wait-on http://localhost:3000 && electron .\"",
+    "react-dev": "react-scripts start",
+    "react-build": "react-scripts build",
+    "build": "npm run react-build && electron-builder",
+    "build-win": "npm run react-build && electron-builder --win",
+    "build-linux": "npm run react-build && electron-builder --linux",
+    "build-mac": "npm run react-build && electron-builder --mac",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "keywords": [
+    "frp",
+    "bypass",
+    "android",
+    "electron",
+    "react"
+  ],
+  "author": "FRP Bypass Professional Team",
+  "license": "SEE LICENSE IN ../LICENSE",
+  "dependencies": {
+    "@electron/remote": "^2.0.12",
+    "@mui/material": "^5.14.15",
+    "@mui/icons-material": "^5.14.15",
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "axios": "^1.5.1",
+    "electron-store": "^8.1.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.16.0",
+    "recharts": "^2.8.0",
+    "socket.io-client": "^4.7.2",
+    "styled-components": "^6.1.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.31",
+    "@types/react-dom": "^18.2.14",
+    "concurrently": "^8.2.2",
+    "electron": "^27.0.0",
+    "electron-builder": "^24.6.4",
+    "react-scripts": "^5.0.1",
+    "typescript": "^5.2.2",
+    "wait-on": "^7.0.1"
+  },
+  "build": {
+    "appId": "com.frp-bypass-professional.app",
+    "productName": "FRP Bypass Professional",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "build/**/*",
+      "src/main.js",
+      "src/preload.js",
+      "node_modules/**/*"
+    ],
+    "extraResources": [
+      {
+        "from": "../core",
+        "to": "core"
+      },
+      {
+        "from": "../database",
+        "to": "database"
+      },
+      {
+        "from": "../main.py",
+        "to": "main.py"
+      }
+    ],
+    "win": {
+      "target": "nsis",
+      "icon": "assets/icon.ico"
+    },
+    "linux": {
+      "target": "AppImage",
+      "icon": "assets/icon.png"
+    },
+    "mac": {
+      "target": "dmg",
+      "icon": "assets/icon.icns"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    }
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

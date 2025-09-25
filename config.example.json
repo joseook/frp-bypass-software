@@ -1,0 +1,46 @@
+{
+  "version": "1.0.0",
+  "setup_date": "2025-09-25 11:41:00",
+  "python_version": "3.9.0",
+  "platform": "Windows-10-10.0.26100-SP0",
+  "directories": {
+    "logs": "logs/",
+    "temp": "temp/",
+    "exports": "exports/",
+    "backups": "backups/",
+    "cache": "cache/"
+  },
+  "features": {
+    "adb_available": true,
+    "fastboot_available": true,
+    "demo_license": true,
+    "gui_enabled": true,
+    "cache_enabled": true,
+    "auto_updates": false
+  },
+  "security": {
+    "audit_enabled": true,
+    "compliance_checks": true,
+    "license_validation": true,
+    "encryption_enabled": true
+  },
+  "performance": {
+    "cache_size_mb": 100,
+    "max_concurrent_operations": 3,
+    "timeout_seconds": 30,
+    "retry_attempts": 3
+  },
+  "ui": {
+    "theme": "dark",
+    "language": "pt-BR",
+    "auto_scan_interval": 30,
+    "notifications_enabled": true,
+    "sound_enabled": false
+  },
+  "advanced": {
+    "debug_mode": false,
+    "verbose_logging": false,
+    "telemetry_enabled": false,
+    "beta_features": false
+  }
+}

@@ -1,0 +1,59 @@
+# FRP Bypass Professional - Dependências Python
+# Versão: 1.0.0
+
+# === DEPENDÊNCIAS CRÍTICAS ===
+# Comunicação USB e dispositivos Android
+pyusb>=1.2.1
+adb-shell>=0.4.4
+python-adb>=0.3.0
+
+# Segurança e criptografia
+cryptography>=41.0.0
+pycryptodome>=3.18.0
+
+# Comunicação de rede e APIs
+requests>=2.31.0
+urllib3>=2.0.0
+flask>=2.3.0
+flask-cors>=4.0.0
+
+# Interface de linha de comando
+click>=8.1.0
+colorama>=0.4.6
+rich>=13.5.0
+
+# Logging e monitoramento
+loguru>=0.7.0
+
+# Utilitários do sistema
+psutil>=5.9.0
+py-cpuinfo>=9.0.0
+
+# Parsing e estruturas de dados
+pyyaml>=6.0.1
+jsonschema>=4.19.0
+
+# === DEPENDÊNCIAS DE DESENVOLVIMENTO ===
+# Testes
+pytest>=7.4.0
+pytest-cov>=4.1.0
+pytest-mock>=3.11.0
+
+# Linting e formatação
+black>=23.7.0
+flake8>=6.0.0
+mypy>=1.5.0
+
+# Build e distribuição
+setuptools>=68.0.0
+wheel>=0.41.0
+cx-freeze>=6.15.0
+
+# === DEPENDÊNCIAS OPCIONAIS ===
+# Interface gráfica (se necessário)
+# PyQt5>=5.15.9
+# tkinter (built-in no Python)
+
+# Análise de performance
+# memory-profiler>=0.61.0
+# line-profiler>=4.1.0

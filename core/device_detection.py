@@ -145,6 +145,14 @@ class DeviceDetector:
         0x6859: DeviceMode.NORMAL,       # Normal mode
     }
     
+    # Product IDs para LG
+    LG_PRODUCT_IDS = {
+        0x618e: DeviceMode.ADB,          # LG ADB mode
+        0x6000: DeviceMode.NORMAL,       # LG Normal mode
+        0x633e: DeviceMode.FASTBOOT,     # LG Fastboot mode
+        0x6344: DeviceMode.RECOVERY,     # LG Recovery mode
+    }
+    
     def __init__(self):
         """Inicializa o detector de dispositivos"""
         self.detected_devices: List[AndroidDevice] = []
@@ -250,6 +258,10 @@ class DeviceDetector:
         # Samsung specific detection
         if vendor_id == 0x04e8:  # Samsung
             return self.SAMSUNG_PRODUCT_IDS.get(product_id, DeviceMode.UNKNOWN)
+        
+        # LG specific detection
+        if vendor_id == 0x1004:  # LG Electronics
+            return self.LG_PRODUCT_IDS.get(product_id, DeviceMode.UNKNOWN)
         
         # Para outros fabricantes, tentamos detectar via ADB/Fastboot
         return self._detect_mode_via_tools()
@@ -413,9 +425,43 @@ class DeviceDetector:
                 # Verifica especificamente FRP
                 if 'frp' in output or 'factory reset protection' in output:
                     device.frp_locked = True
+            
+            # Para dispositivos LG, verifica também Secure Startup
+            if device.manufacturer == Manufacturer.LG:
+                self._check_lg_secure_startup(device)
                     
         except Exception as e:
             logger.error(f"Erro ao verificar status FRP: {e}")
+    
+    def _check_lg_secure_startup(self, device: AndroidDevice) -> None:
+        """
+        Verifica se dispositivo LG tem Secure Startup ativo
+        
+        Args:
+            device: Dispositivo LG para verificar
+        """
+        try:
+            # Verifica configurações de criptografia
+            result = subprocess.run(
+                ['adb', '-s', device.serial, 'shell', 'getprop', 'ro.crypto.state'],
+                capture_output=True, text=True, timeout=10
+            )
+            
+            if result.returncode == 0:
+                crypto_state = result.stdout.strip().lower()
+                if crypto_state == 'encrypted':
+                    # Verifica se requer senha no boot
+                    pwd_result = subprocess.run(
+                        ['adb', '-s', device.serial, 'shell', 'settings', 'get', 'global', 'require_password_to_decrypt'],
+                        capture_output=True, text=True, timeout=10
+                    )
+                    
+                    if pwd_result.returncode == 0 and pwd_result.stdout.strip() == '1':
+                        device.frp_locked = True
+                        logger.info(f"Dispositivo {device.device_id} tem Secure Startup ativo")
+                        
+        except Exception as e:
+            logger.debug(f"Erro ao verificar Secure Startup: {e}")
     
     def get_device_by_serial(self, serial: str) -> Optional[AndroidDevice]:
         """

@@ -39,12 +39,12 @@ function Test-Installation {
 function Quick-Install {
     Write-ColorOutput Yellow "🚀 Instalação não encontrada. Executando instalação rápida..."
     
-    $installScript = "irm https://raw.githubusercontent.com/frp-bypass/professional/main/install.ps1 | iex"
+    $installScript = "irm https://raw.githubusercontent.com/joseook/frp-bypass-software/main/install.ps1 | iex"
     Invoke-Expression $installScript
     
     if (-not (Test-Installation)) {
         Write-ColorOutput Red "❌ Falha na instalação automática."
-        Write-ColorOutput Yellow "Execute manualmente: irm https://raw.githubusercontent.com/frp-bypass/professional/main/install.ps1 | iex"
+        Write-ColorOutput Yellow "Execute manualmente: irm https://raw.githubusercontent.com/joseook/frp-bypass-software/main/install.ps1 | iex"
         exit 1
     }
 }
@@ -173,10 +173,10 @@ try {
     Write-Host ""
     Write-ColorOutput Yellow "💡 Soluções:"
     Write-ColorOutput White "  1. Execute como administrador"
-    Write-ColorOutput White "  2. Instale manualmente: irm https://raw.githubusercontent.com/frp-bypass/professional/main/install.ps1 | iex"
+        Write-ColorOutput White "  2. Instale manualmente: irm https://raw.githubusercontent.com/joseook/frp-bypass-software/main/install.ps1 | iex"
     Write-ColorOutput White "  3. Verifique se Node.js e Python estão instalados"
     Write-Host ""
-    Write-ColorOutput Cyan "Para suporte: https://github.com/frp-bypass/professional/issues"
+    Write-ColorOutput Cyan "Para suporte: https://github.com/joseook/frp-bypass-software/issues"
     
     Read-Host "Pressione Enter para sair"
     exit 1

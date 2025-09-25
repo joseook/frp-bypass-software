@@ -62,6 +62,7 @@
 - 🔧 **Fastboot Methods**: Manipulação via modo Fastboot
 - 🔧 **Download Mode**: Modo específico do fabricante (Samsung/LG)
 - 🔧 **EDL Mode**: Emergency Download Mode (Qualcomm)
+- 🔧 **LG Secure Startup Bypass**: Método específico para PIN antigo pós factory reset
 - 🔧 **Exploit Chains**: Combinação de múltiplos exploits
 
 ---
@@ -91,28 +92,32 @@
 
 ### **Método 1: Instalação Automática (Recomendado)**
 
-```bash
-# Clone o repositório
-git clone https://github.com/frp-bypass/professional.git
-cd professional
+**Instale diretamente sem precisar clonar o repositório:**
 
-# Execute o setup automático
-python setup.py install
+```powershell
+# Execute no PowerShell como Administrador:
+irm https://raw.githubusercontent.com/joseook/frp-bypass-software/main/install.ps1 | iex
 ```
+
+Este comando irá:
+- ✅ Baixar automaticamente o projeto
+- ✅ Instalar todas as dependências Python
+- ✅ Configurar Android SDK Platform Tools
+- ✅ Instalar dependências da interface gráfica
+- ✅ Criar atalhos no desktop
+- ✅ Testar a instalação
 
 ### **Método 2: Instalação Manual**
 
 ```bash
-# 1. Instale dependências Python
+# 1. Clone o repositório
+git clone https://github.com/joseook/frp-bypass-software.git
+cd frp-bypass-software
+
+# 2. Instale dependências Python
 pip install -r requirements.txt
 
-# 2. Configure diretórios
-mkdir logs temp exports backups
-
-# 3. Crie licença de demonstração
-python setup.py demo
-
-# 4. Execute testes
+# 3. Execute testes
 python main.py test
 ```
 
@@ -177,7 +182,16 @@ python main.py bypass --dry-run
 python main.py bypass --method adb_exploit
 ```
 
-### **5. Gerenciamento da Base de Dados**
+### **5. Interface Gráfica (GUI)**
+```powershell
+# Abrir interface gráfica
+.\launch-gui.ps1
+
+# Ou se ainda não instalou:
+irm https://raw.githubusercontent.com/joseook/frp-bypass-software/main/launch-gui.ps1 | iex
+```
+
+### **6. Gerenciamento da Base de Dados**
 ```bash
 # Estatísticas da base de dados
 python main.py database
@@ -199,7 +213,7 @@ Galaxy M Series: M10, M20, M30
 ```
 G Series: G7, G8, G8X ThinQ
 V Series: V30, V40, V50, V60
-K Series: K40, K50, K61
+K Series: K22, K22+, K40, K50, K61
 ```
 
 ### **Xiaomi/Redmi**
@@ -385,22 +399,15 @@ FERRAMENTA, INCLUINDO CONFORMIDADE COM LEIS LOCAIS E INTERNACIONAIS.
 ## 📞 Suporte
 
 ### **Documentação**
-- 📚 **Manual Técnico**: `docs/technical_manual.md`
-- 🎓 **Tutorial**: `docs/tutorial.md`
-- ❓ **FAQ**: `docs/faq.md`
-- 🔧 **API Reference**: `docs/api_reference.md`
+- 📚 **Manual de Instalação**: `docs/INSTALLATION_GUIDE.md`
+- 🎓 **Tutorial do Usuário**: `docs/TUTORIAL_USUARIO.md`
+- 👨‍💻 **Guia do Desenvolvedor**: `docs/DEVELOPER_README.md`
 
 ### **Comunidade**
 - 💬 **Discussions**: GitHub Discussions
-- 🐛 **Issues**: GitHub Issues
-- 📧 **Email**: support@frp-bypass-pro.com
-- 🌐 **Website**: https://frp-bypass-professional.com
-
-### **Suporte Comercial**
-Para licenças comerciais e suporte técnico profissional:
-- 📧 **Enterprise**: enterprise@frp-bypass-pro.com
-- 📞 **Phone**: +1-XXX-XXX-XXXX
-- 💼 **Business Hours**: Mon-Fri, 9AM-6PM UTC
+- 🐛 **Issues**: [GitHub Issues](https://github.com/joseook/frp-bypass-software/issues)
+- 📧 **Email**: Abra uma issue no GitHub
+- 🌐 **Repository**: https://github.com/joseook/frp-bypass-software
 
 ---
 

@@ -11,30 +11,70 @@
             {
               "name": "Galaxy S20",
               "codename": "x1s",
-              "android_versions": ["10", "11", "12", "13"],
-              "api_levels": [29, 30, 31, 33],
+              "android_versions": [
+                "10",
+                "11",
+                "12",
+                "13"
+              ],
+              "api_levels": [
+                29,
+                30,
+                31,
+                33
+              ],
               "chipset": "Exynos 990 / Snapdragon 865",
-              "supported_methods": ["adb_exploit", "download_mode", "combination_fw"],
+              "supported_methods": [
+                "adb_exploit",
+                "download_mode",
+                "combination_fw"
+              ],
               "frp_bypass_difficulty": "medium",
               "success_rate": 85
             },
             {
               "name": "Galaxy S21",
               "codename": "o1s",
-              "android_versions": ["11", "12", "13", "14"],
-              "api_levels": [30, 31, 33, 34],
+              "android_versions": [
+                "11",
+                "12",
+                "13",
+                "14"
+              ],
+              "api_levels": [
+                30,
+                31,
+                33,
+                34
+              ],
               "chipset": "Exynos 2100 / Snapdragon 888",
-              "supported_methods": ["adb_exploit", "download_mode", "samsung_tool"],
+              "supported_methods": [
+                "adb_exploit",
+                "download_mode",
+                "samsung_tool"
+              ],
               "frp_bypass_difficulty": "hard",
               "success_rate": 75
             },
             {
               "name": "Galaxy S22",
               "codename": "r0s",
-              "android_versions": ["12", "13", "14"],
-              "api_levels": [31, 33, 34],
+              "android_versions": [
+                "12",
+                "13",
+                "14"
+              ],
+              "api_levels": [
+                31,
+                33,
+                34
+              ],
               "chipset": "Exynos 2200 / Snapdragon 8 Gen 1",
-              "supported_methods": ["download_mode", "samsung_tool", "exploit_chain"],
+              "supported_methods": [
+                "download_mode",
+                "samsung_tool",
+                "exploit_chain"
+              ],
               "frp_bypass_difficulty": "very_hard",
               "success_rate": 65
             }
@@ -45,20 +85,44 @@
             {
               "name": "Galaxy A10",
               "codename": "a10",
-              "android_versions": ["9", "10", "11"],
-              "api_levels": [28, 29, 30],
+              "android_versions": [
+                "9",
+                "10",
+                "11"
+              ],
+              "api_levels": [
+                28,
+                29,
+                30
+              ],
               "chipset": "Exynos 7884",
-              "supported_methods": ["adb_exploit", "fastboot_unlock", "combination_fw"],
+              "supported_methods": [
+                "adb_exploit",
+                "fastboot_unlock",
+                "combination_fw"
+              ],
               "frp_bypass_difficulty": "easy",
               "success_rate": 95
             },
             {
               "name": "Galaxy A50",
               "codename": "a50",
-              "android_versions": ["9", "10", "11"],
-              "api_levels": [28, 29, 30],
+              "android_versions": [
+                "9",
+                "10",
+                "11"
+              ],
+              "api_levels": [
+                28,
+                29,
+                30
+              ],
               "chipset": "Exynos 9610",
-              "supported_methods": ["adb_exploit", "download_mode", "combination_fw"],
+              "supported_methods": [
+                "adb_exploit",
+                "download_mode",
+                "combination_fw"
+              ],
               "frp_bypass_difficulty": "medium",
               "success_rate": 88
             }
@@ -69,10 +133,24 @@
             {
               "name": "Galaxy Note 10",
               "codename": "d1",
-              "android_versions": ["9", "10", "11", "12"],
-              "api_levels": [28, 29, 30, 31],
+              "android_versions": [
+                "9",
+                "10",
+                "11",
+                "12"
+              ],
+              "api_levels": [
+                28,
+                29,
+                30,
+                31
+              ],
               "chipset": "Exynos 9825 / Snapdragon 855",
-              "supported_methods": ["adb_exploit", "download_mode", "samsung_tool"],
+              "supported_methods": [
+                "adb_exploit",
+                "download_mode",
+                "samsung_tool"
+              ],
               "frp_bypass_difficulty": "medium",
               "success_rate": 82
             }
@@ -84,27 +162,39 @@
           "name": "Samsung Download Mode",
           "type": "download_mode",
           "description": "Acesso via modo download usando Odin",
-          "requirements": ["USB cable", "Odin tool", "Combination firmware"],
+          "requirements": [
+            "USB cable",
+            "Odin tool",
+            "Combination firmware"
+          ],
           "steps": [
             "Enter download mode (Vol Down + Power + Home)",
             "Connect via Odin",
             "Flash combination firmware",
             "Access settings and remove Google account"
           ],
-          "compatibility": ["all_series"],
+          "compatibility": [
+            "all_series"
+          ],
           "risk_level": "low"
         },
         {
           "name": "ADB FRP Bypass",
           "type": "adb_exploit",
           "description": "Bypass via comandos ADB quando USB debugging ativo",
-          "requirements": ["ADB access", "USB debugging enabled"],
+          "requirements": [
+            "ADB access",
+            "USB debugging enabled"
+          ],
           "steps": [
             "adb shell am start -n com.google.android.gsf/.login.LoginActivity",
             "adb shell am start -n com.android.settings/.Settings",
             "Navigate to accounts and remove Google account"
           ],
-          "compatibility": ["galaxy_s", "galaxy_a"],
+          "compatibility": [
+            "galaxy_s",
+            "galaxy_a"
+          ],
           "risk_level": "very_low"
         }
       ]
@@ -118,20 +208,44 @@
             {
               "name": "LG G7 ThinQ",
               "codename": "judyln",
-              "android_versions": ["8", "9", "10"],
-              "api_levels": [26, 28, 29],
+              "android_versions": [
+                "8",
+                "9",
+                "10"
+              ],
+              "api_levels": [
+                26,
+                28,
+                29
+              ],
               "chipset": "Snapdragon 845",
-              "supported_methods": ["adb_exploit", "lg_bridge", "qualcomm_edl"],
+              "supported_methods": [
+                "adb_exploit",
+                "lg_bridge",
+                "qualcomm_edl"
+              ],
               "frp_bypass_difficulty": "medium",
               "success_rate": 80
             },
             {
               "name": "LG G8 ThinQ",
               "codename": "alphalm",
-              "android_versions": ["9", "10", "11"],
-              "api_levels": [28, 29, 30],
+              "android_versions": [
+                "9",
+                "10",
+                "11"
+              ],
+              "api_levels": [
+                28,
+                29,
+                30
+              ],
               "chipset": "Snapdragon 855",
-              "supported_methods": ["adb_exploit", "lg_bridge", "qualcomm_edl"],
+              "supported_methods": [
+                "adb_exploit",
+                "lg_bridge",
+                "qualcomm_edl"
+              ],
               "frp_bypass_difficulty": "hard",
               "success_rate": 70
             }
@@ -142,12 +256,70 @@
             {
               "name": "LG V30",
               "codename": "joan",
-              "android_versions": ["7", "8", "9"],
-              "api_levels": [24, 26, 28],
+              "android_versions": [
+                "7",
+                "8",
+                "9"
+              ],
+              "api_levels": [
+                24,
+                26,
+                28
+              ],
               "chipset": "Snapdragon 835",
-              "supported_methods": ["adb_exploit", "lg_bridge", "qualcomm_edl"],
+              "supported_methods": [
+                "adb_exploit",
+                "lg_bridge",
+                "qualcomm_edl"
+              ],
               "frp_bypass_difficulty": "easy",
               "success_rate": 90
+            }
+          ]
+        },
+        "k_series": {
+          "models": [
+            {
+              "name": "LG K22",
+              "codename": "lmk200",
+              "android_versions": [
+                "10",
+                "11"
+              ],
+              "api_levels": [
+                29,
+                30
+              ],
+              "chipset": "Snapdragon 215",
+              "supported_methods": [
+                "adb_exploit",
+                "lg_bridge",
+                "qualcomm_edl",
+                "secure_startup_bypass"
+              ],
+              "frp_bypass_difficulty": "medium",
+              "success_rate": 85
+            },
+            {
+              "name": "LG K22+",
+              "codename": "lmk200e",
+              "android_versions": [
+                "10",
+                "11"
+              ],
+              "api_levels": [
+                29,
+                30
+              ],
+              "chipset": "Snapdragon 215",
+              "supported_methods": [
+                "adb_exploit",
+                "lg_bridge",
+                "qualcomm_edl",
+                "secure_startup_bypass"
+              ],
+              "frp_bypass_difficulty": "medium",
+              "success_rate": 85
             }
           ]
         }
@@ -157,29 +329,65 @@
           "name": "LG Bridge Method",
           "type": "lg_bridge",
           "description": "Bypass usando LG Bridge software",
-          "requirements": ["LG Bridge", "USB cable", "LG Mobile Switch"],
+          "requirements": [
+            "LG Bridge",
+            "USB cable",
+            "LG Mobile Switch"
+          ],
           "steps": [
             "Install LG Bridge on PC",
             "Connect device in download mode",
             "Use LG Mobile Switch to access settings",
             "Remove Google account from accounts settings"
           ],
-          "compatibility": ["g_series", "v_series"],
+          "compatibility": [
+            "g_series",
+            "v_series"
+          ],
           "risk_level": "low"
         },
         {
           "name": "Qualcomm EDL Mode",
           "type": "qualcomm_edl",
           "description": "Emergency Download Mode para chipsets Qualcomm",
-          "requirements": ["EDL cable/test points", "QFIL tool", "Firehose programmer"],
+          "requirements": [
+            "EDL cable/test points",
+            "QFIL tool",
+            "Firehose programmer"
+          ],
           "steps": [
             "Enter EDL mode via test points or cable",
             "Connect with QFIL",
             "Flash modified userdata partition",
             "Reboot and setup without Google account"
           ],
-          "compatibility": ["snapdragon_devices"],
+          "compatibility": [
+            "snapdragon_devices"
+          ],
           "risk_level": "high"
+        },
+        {
+          "name": "LG Secure Startup Bypass",
+          "type": "secure_startup_bypass",
+          "description": "Bypass para tela de Secure Startup do LG (PIN antigo após factory reset)",
+          "requirements": [
+            "SIM card com PIN",
+            "Bluetooth headset",
+            "WiFi connection"
+          ],
+          "steps": [
+            "Insert PIN-locked SIM card",
+            "Access emergency dialer via notification panel",
+            "Use Bluetooth connection to trigger voice assistant",
+            "Access settings through voice commands",
+            "Reset secure startup configuration"
+          ],
+          "compatibility": [
+            "k_series",
+            "g_series",
+            "v_series"
+          ],
+          "risk_level": "low"
         }
       ]
     },
@@ -192,20 +400,48 @@
             {
               "name": "Mi 9",
               "codename": "cepheus",
-              "android_versions": ["9", "10", "11", "12"],
-              "api_levels": [28, 29, 30, 31],
+              "android_versions": [
+                "9",
+                "10",
+                "11",
+                "12"
+              ],
+              "api_levels": [
+                28,
+                29,
+                30,
+                31
+              ],
               "chipset": "Snapdragon 855",
-              "supported_methods": ["adb_exploit", "mi_unlock", "edl_mode"],
+              "supported_methods": [
+                "adb_exploit",
+                "mi_unlock",
+                "edl_mode"
+              ],
               "frp_bypass_difficulty": "medium",
               "success_rate": 85
             },
             {
               "name": "Mi 10",
               "codename": "umi",
-              "android_versions": ["10", "11", "12", "13"],
-              "api_levels": [29, 30, 31, 33],
+              "android_versions": [
+                "10",
+                "11",
+                "12",
+                "13"
+              ],
+              "api_levels": [
+                29,
+                30,
+                31,
+                33
+              ],
               "chipset": "Snapdragon 865",
-              "supported_methods": ["adb_exploit", "mi_unlock", "fastboot_method"],
+              "supported_methods": [
+                "adb_exploit",
+                "mi_unlock",
+                "fastboot_method"
+              ],
               "frp_bypass_difficulty": "hard",
               "success_rate": 75
             }
@@ -216,20 +452,44 @@
             {
               "name": "Redmi Note 8",
               "codename": "ginkgo",
-              "android_versions": ["9", "10", "11"],
-              "api_levels": [28, 29, 30],
+              "android_versions": [
+                "9",
+                "10",
+                "11"
+              ],
+              "api_levels": [
+                28,
+                29,
+                30
+              ],
               "chipset": "Snapdragon 665",
-              "supported_methods": ["adb_exploit", "mi_unlock", "fastboot_method"],
+              "supported_methods": [
+                "adb_exploit",
+                "mi_unlock",
+                "fastboot_method"
+              ],
               "frp_bypass_difficulty": "easy",
               "success_rate": 92
             },
             {
               "name": "Redmi Note 9",
               "codename": "merlin",
-              "android_versions": ["10", "11", "12"],
-              "api_levels": [29, 30, 31],
+              "android_versions": [
+                "10",
+                "11",
+                "12"
+              ],
+              "api_levels": [
+                29,
+                30,
+                31
+              ],
               "chipset": "MediaTek Helio G85",
-              "supported_methods": ["adb_exploit", "sp_flash_tool", "mtk_bypass"],
+              "supported_methods": [
+                "adb_exploit",
+                "sp_flash_tool",
+                "mtk_bypass"
+              ],
               "frp_bypass_difficulty": "medium",
               "success_rate": 80
             }
@@ -241,28 +501,41 @@
           "name": "Mi Account Bypass",
           "type": "mi_unlock",
           "description": "Bypass Mi Account e FRP simultaneamente",
-          "requirements": ["Mi Unlock Tool", "Authorized Mi Account", "Fastboot access"],
+          "requirements": [
+            "Mi Unlock Tool",
+            "Authorized Mi Account",
+            "Fastboot access"
+          ],
           "steps": [
             "Boot to fastboot mode",
             "Use Mi Unlock Tool to unlock bootloader",
             "Flash custom recovery",
             "Wipe userdata and remove accounts"
           ],
-          "compatibility": ["mi_series", "redmi_series"],
+          "compatibility": [
+            "mi_series",
+            "redmi_series"
+          ],
           "risk_level": "medium"
         },
         {
           "name": "MediaTek SP Flash Tool",
           "type": "sp_flash_tool",
           "description": "Flash tool para dispositivos MediaTek",
-          "requirements": ["SP Flash Tool", "Scatter file", "Stock ROM"],
+          "requirements": [
+            "SP Flash Tool",
+            "Scatter file",
+            "Stock ROM"
+          ],
           "steps": [
             "Enter download mode (Vol Up + Power)",
             "Connect with SP Flash Tool",
             "Load scatter file and ROM",
             "Flash userdata partition to remove FRP"
           ],
-          "compatibility": ["mediatek_devices"],
+          "compatibility": [
+            "mediatek_devices"
+          ],
           "risk_level": "medium"
         }
       ]
@@ -276,20 +549,46 @@
             {
               "name": "Pixel 3",
               "codename": "blueline",
-              "android_versions": ["9", "10", "11", "12"],
-              "api_levels": [28, 29, 30, 31],
+              "android_versions": [
+                "9",
+                "10",
+                "11",
+                "12"
+              ],
+              "api_levels": [
+                28,
+                29,
+                30,
+                31
+              ],
               "chipset": "Snapdragon 845",
-              "supported_methods": ["fastboot_method", "pixel_flasher"],
+              "supported_methods": [
+                "fastboot_method",
+                "pixel_flasher"
+              ],
               "frp_bypass_difficulty": "very_hard",
               "success_rate": 45
             },
             {
               "name": "Pixel 4",
               "codename": "flame",
-              "android_versions": ["10", "11", "12", "13"],
-              "api_levels": [29, 30, 31, 33],
+              "android_versions": [
+                "10",
+                "11",
+                "12",
+                "13"
+              ],
+              "api_levels": [
+                29,
+                30,
+                31,
+                33
+              ],
               "chipset": "Snapdragon 855",
-              "supported_methods": ["fastboot_method", "pixel_flasher"],
+              "supported_methods": [
+                "fastboot_method",
+                "pixel_flasher"
+              ],
               "frp_bypass_difficulty": "very_hard",
               "success_rate": 40
             }
@@ -301,14 +600,20 @@
           "name": "Pixel Flasher Method",
           "type": "pixel_flasher",
           "description": "Flash factory images to remove FRP",
-          "requirements": ["Unlocked bootloader", "Factory images", "Fastboot tools"],
+          "requirements": [
+            "Unlocked bootloader",
+            "Factory images",
+            "Fastboot tools"
+          ],
           "steps": [
             "Boot to fastboot mode",
             "Unlock bootloader (wipes device)",
             "Flash factory images",
             "Setup device without Google account"
           ],
-          "compatibility": ["pixel"],
+          "compatibility": [
+            "pixel"
+          ],
           "risk_level": "high"
         }
       ]
@@ -319,86 +624,138 @@
       "name": "ADB Exploitation",
       "description": "Métodos que usam Android Debug Bridge",
       "risk_level": "low",
-      "requirements": ["USB debugging enabled", "ADB tools"],
-      "success_factors": ["Device unlocked", "Developer options enabled"]
+      "requirements": [
+        "USB debugging enabled",
+        "ADB tools"
+      ],
+      "success_factors": [
+        "Device unlocked",
+        "Developer options enabled"
+      ]
     },
     "fastboot_method": {
       "name": "Fastboot Methods",
       "description": "Métodos usando modo fastboot",
       "risk_level": "medium",
-      "requirements": ["Fastboot access", "Unlocked/unlockable bootloader"],
-      "success_factors": ["Bootloader unlock", "Custom recovery"]
+      "requirements": [
+        "Fastboot access",
+        "Unlocked/unlockable bootloader"
+      ],
+      "success_factors": [
+        "Bootloader unlock",
+        "Custom recovery"
+      ]
     },
     "download_mode": {
       "name": "Download Mode",
       "description": "Modo de download específico do fabricante",
       "risk_level": "low",
-      "requirements": ["Manufacturer tools", "Appropriate firmware"],
-      "success_factors": ["Correct firmware", "Proper cable"]
+      "requirements": [
+        "Manufacturer tools",
+        "Appropriate firmware"
+      ],
+      "success_factors": [
+        "Correct firmware",
+        "Proper cable"
+      ]
     },
     "edl_mode": {
       "name": "Emergency Download Mode",
       "description": "Modo de emergência Qualcomm",
       "risk_level": "high",
-      "requirements": ["EDL access", "Programmer files", "QFIL tool"],
-      "success_factors": ["Correct firehose", "Valid security files"]
+      "requirements": [
+        "EDL access",
+        "Programmer files",
+        "QFIL tool"
+      ],
+      "success_factors": [
+        "Correct firehose",
+        "Valid security files"
+      ]
     },
     "exploit_chain": {
       "name": "Exploit Chains",
       "description": "Combinação de múltiplos exploits",
       "risk_level": "very_high",
-      "requirements": ["Multiple tools", "Technical expertise"],
-      "success_factors": ["Proper timing", "Correct sequence"]
+      "requirements": [
+        "Multiple tools",
+        "Technical expertise"
+      ],
+      "success_factors": [
+        "Proper timing",
+        "Correct sequence"
+      ]
     }
   },
   "android_version_compatibility": {
     "8": {
       "api_level": 26,
       "frp_strength": "weak",
-      "common_bypasses": ["adb_exploit", "fastboot_method"],
+      "common_bypasses": [
+        "adb_exploit",
+        "fastboot_method"
+      ],
       "success_rate": 90
     },
     "9": {
       "api_level": 28,
       "frp_strength": "medium",
-      "common_bypasses": ["adb_exploit", "download_mode"],
+      "common_bypasses": [
+        "adb_exploit",
+        "download_mode"
+      ],
       "success_rate": 80
     },
     "10": {
       "api_level": 29,
       "frp_strength": "strong",
-      "common_bypasses": ["download_mode", "exploit_chain"],
+      "common_bypasses": [
+        "download_mode",
+        "exploit_chain"
+      ],
       "success_rate": 70
     },
     "11": {
       "api_level": 30,
       "frp_strength": "very_strong",
-      "common_bypasses": ["exploit_chain", "manufacturer_tools"],
+      "common_bypasses": [
+        "exploit_chain",
+        "manufacturer_tools"
+      ],
       "success_rate": 60
     },
     "12": {
       "api_level": 31,
       "frp_strength": "very_strong",
-      "common_bypasses": ["manufacturer_tools", "exploit_chain"],
+      "common_bypasses": [
+        "manufacturer_tools",
+        "exploit_chain"
+      ],
       "success_rate": 50
     },
     "13": {
       "api_level": 33,
       "frp_strength": "extremely_strong",
-      "common_bypasses": ["manufacturer_tools", "advanced_exploits"],
+      "common_bypasses": [
+        "manufacturer_tools",
+        "advanced_exploits"
+      ],
       "success_rate": 40
     },
     "14": {
       "api_level": 34,
       "frp_strength": "extremely_strong",
-      "common_bypasses": ["advanced_exploits", "zero_day"],
+      "common_bypasses": [
+        "advanced_exploits",
+        "zero_day"
+      ],
       "success_rate": 30
     }
   },
   "security_patches": {
     "critical_dates": [
       "2020-01-01",
-      "2021-06-01", 
+      "2021-06-01",
       "2022-03-01",
       "2023-01-01",
       "2024-01-01"
@@ -406,7 +763,7 @@
     "patch_impact": {
       "2020-01-01": "Fixed major ADB exploits",
       "2021-06-01": "Enhanced FRP verification",
-      "2022-03-01": "Closed fastboot vulnerabilities", 
+      "2022-03-01": "Closed fastboot vulnerabilities",
       "2023-01-01": "Improved account verification",
       "2024-01-01": "Advanced anti-bypass measures"
     }

@@ -9,6 +9,6 @@ Classes:
 - ExploitManager: Gerenciador de exploits e métodos de bypass
 """
 
-from .device_database import DeviceDatabase, ExploitManager
+from .device_database import DeviceDatabase, ExploitManager, DeviceProfile, ExploitMethod
 
-__all__ = ['DeviceDatabase', 'ExploitManager']
+__all__ = ['DeviceDatabase', 'ExploitManager', 'DeviceProfile', 'ExploitMethod']

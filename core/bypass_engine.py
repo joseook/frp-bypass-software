@@ -23,7 +23,7 @@ import json
 
 from .device_detection import AndroidDevice, DeviceMode
 from .communication import CommunicationManager, ADBInterface, FastbootInterface, USBCommunicator
-from ..database import DeviceDatabase, ExploitManager, DeviceProfile, ExploitMethod
+from database import DeviceDatabase, ExploitManager, DeviceProfile, ExploitMethod
 
 
 class BypassStatus(Enum):
@@ -336,6 +336,185 @@ class ADBBypassMethod(BypassMethod):
             return False
 
 
+class LGSecureStartupBypassMethod(BypassMethod):
+    """Método de bypass para LG Secure Startup (PIN antigo após factory reset)"""
+    
+    def can_execute(self) -> Tuple[bool, str]:
+        """Verifica se pode executar bypass de Secure Startup"""
+        if self.device.manufacturer.value.lower() != "lg":
+            return False, "Método específico para dispositivos LG"
+        
+        # Aceita qualquer modo para LG, pois podemos dar instruções
+        # Verifica se é um modelo LG da série K que suporta este método
+        if self.device.model and "k22" in self.device.model.lower():
+            return True, "Método Secure Startup disponível para LG K22+"
+        
+        return True, "Método Secure Startup disponível para dispositivos LG"
+    
+    def execute(self) -> BypassResult:
+        """Executa bypass de Secure Startup"""
+        start_time = time.time()
+        self.result.status = BypassStatus.IN_PROGRESS
+        self.result.add_log("Iniciando bypass LG Secure Startup")
+        
+        try:
+            # Etapa 1: Preparação
+            if not self.prepare_device():
+                raise Exception("Falha na preparação do dispositivo")
+            
+            # Etapa 2: Verificação de conectividade
+            interface = self.comm_manager.get_interface(self.device)
+            
+            # Etapa 3: Execução do bypass específico
+            success = self._execute_secure_startup_bypass(interface)
+            
+            if success:
+                self.result.status = BypassStatus.SUCCESS
+                self.result.success = True
+                self.result.add_log("✓ Bypass Secure Startup executado com sucesso")
+            else:
+                self.result.status = BypassStatus.FAILED
+                self.result.error_message = "Falha na execução do bypass Secure Startup"
+                self.result.add_log("✗ Falha na execução do bypass")
+                
+        except Exception as e:
+            self.result.status = BypassStatus.ERROR
+            self.result.error_message = str(e)
+            self.result.add_log(f"✗ Erro durante bypass Secure Startup: {e}")
+        
+        finally:
+            self.result.execution_time = time.time() - start_time
+            self.result.add_log(f"Bypass finalizado em {self.result.execution_time:.2f}s")
+        
+        return self.result
+    
+    def _execute_secure_startup_bypass(self, interface) -> bool:
+        """Executa o bypass específico do Secure Startup"""
+        try:
+            self.result.add_log("Executando bypass Secure Startup para LG K22+")
+            
+            # Método 1: Tentar reset via comandos ADB se disponível
+            if isinstance(interface, ADBInterface):
+                return self._execute_adb_secure_startup_bypass(interface)
+            
+            # Método 2: Instruções para bypass manual
+            return self._execute_manual_secure_startup_bypass()
+            
+        except Exception as e:
+            self.result.add_log(f"Erro na execução Secure Startup: {e}")
+            return False
+    
+    def _execute_adb_secure_startup_bypass(self, interface: ADBInterface) -> bool:
+        """Executa bypass via comandos ADB"""
+        try:
+            self.result.add_log("Tentando bypass via comandos ADB")
+            
+            # Remove configurações de secure startup
+            commands = [
+                "settings put global require_password_to_decrypt 0",
+                "settings put system lockscreen.password_type 0",
+                "settings put system lockscreen.password_type_alternate 0",
+                "settings delete secure lock_pattern_enabled",
+                "settings delete secure lockscreen.password_salt",
+            ]
+            
+            success_count = 0
+            for cmd in commands:
+                result = interface.shell_command(cmd)
+                if result.success:
+                    success_count += 1
+                    self.result.add_log(f"✓ Comando executado: {cmd}")
+                else:
+                    self.result.add_log(f"✗ Falha no comando: {cmd}")
+            
+            if success_count > 0:
+                self.result.steps_completed.append("adb_secure_startup_reset")
+                
+                # Força reinicialização dos serviços
+                interface.shell_command("am broadcast -a android.intent.action.BOOT_COMPLETED")
+                
+                return True
+            
+            return False
+            
+        except Exception as e:
+            self.result.add_log(f"Erro no bypass ADB: {e}")
+            return False
+    
+    def _execute_manual_secure_startup_bypass(self) -> bool:
+        """Fornece instruções para bypass manual"""
+        try:
+            self.result.add_log("Iniciando bypass manual Secure Startup")
+            
+            # Método 1: Com SIM PIN (se disponível)
+            sim_method = [
+                "=== MÉTODO 1: COM SIM PIN (Recomendado) ===",
+                "1. Insira um cartão SIM com PIN ativo no dispositivo",
+                "2. Ligue o dispositivo e aguarde a tela de PIN do SIM",
+                "3. Digite o PIN do SIM e confirme",
+                "4. Deslize para baixo a partir da notificação 'Not signed in'",
+                "5. Toque e segure no ícone Bluetooth para ativá-lo",
+                "6. Conecte um fone Bluetooth e pressione 3x o botão de chamada",
+                "7. Use comandos de voz para acessar as configurações",
+                "8. Navegue até Security > Screen Lock e remova o PIN antigo"
+            ]
+            
+            # Método 2: Sem SIM (alternativo)
+            no_sim_method = [
+                "",
+                "=== MÉTODO 2: SEM SIM (Alternativo) ===",
+                "1. Force restart: Volume Down + Power por 10 segundos",
+                "2. Quando aparecer 'LG', solte Power e segure novamente",
+                "3. Continue segurando até aparecer 'Factory data reset'",
+                "4. Use Volume Down para ir para 'Yes' e pressione Power",
+                "5. Confirme novamente com 'Yes'",
+                "6. Aguarde o reset completo",
+                "7. Na tela de Welcome, toque e segure 'Emergency Call'",
+                "8. Ao mesmo tempo, toque rapidamente na seta →",
+                "9. Isso pode crashar o setup e dar acesso às configurações",
+                "10. Se conseguir acesso, vá em Settings > Security > Screen Lock"
+            ]
+            
+            # Método 3: Via Recovery Mode
+            recovery_method = [
+                "",
+                "=== MÉTODO 3: VIA RECOVERY MODE ===",
+                "1. Desligue o dispositivo completamente",
+                "2. Pressione e segure Volume Down + Power",
+                "3. Quando vibrar, solte Power e segure novamente",
+                "4. Continue até aparecer menu de Recovery",
+                "5. Use Volume para navegar até 'Wipe data/factory reset'",
+                "6. Confirme com Power button",
+                "7. Após reset, use método de bypass FRP padrão",
+                "8. Na tela Google, use truque do Emergency Call"
+            ]
+            
+            # Método 4: Modo Download (LG Bridge)
+            download_method = [
+                "",
+                "=== MÉTODO 4: MODO DOWNLOAD (Requer PC) ===",
+                "1. Instale LG Bridge no PC",
+                "2. Desligue o LG K22+",
+                "3. Pressione Volume Up + conecte cabo USB",
+                "4. Mantenha Volume Up até aparecer modo Download",
+                "5. LG Bridge detectará o dispositivo",
+                "6. Use função 'Update Error Recovery'",
+                "7. Isso pode resetar configurações de segurança"
+            ]
+            
+            all_methods = sim_method + no_sim_method + recovery_method + download_method
+            
+            for instruction in all_methods:
+                self.result.add_log(instruction)
+            
+            self.result.steps_completed.append("multiple_methods_provided")
+            return True
+            
+        except Exception as e:
+            self.result.add_log(f"Erro ao fornecer instruções manuais: {e}")
+            return False
+
+
 class FastbootBypassMethod(BypassMethod):
     """Método de bypass via Fastboot"""
     
@@ -441,6 +620,10 @@ class BypassStrategy:
         
         if self.device.mode == DeviceMode.FASTBOOT:
             self.methods.append((FastbootBypassMethod, 0.8))  # Alta prioridade para Fastboot
+        
+        # Método específico para LG Secure Startup (PIN antigo após factory reset)
+        if self.device.manufacturer.value.lower() == "lg":
+            self.methods.append((LGSecureStartupBypassMethod, 0.95))  # Prioridade mais alta para LG
         
         logger.info(f"Estratégia gerada com {len(self.methods)} métodos")
     

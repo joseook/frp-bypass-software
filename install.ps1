@@ -13,9 +13,9 @@ $ErrorActionPreference = "Stop"
 $ProgressPreference = "SilentlyContinue"
 
 # URLs do projeto
-$GITHUB_REPO = "https://github.com/frp-bypass/professional"
-$RAW_BASE = "https://raw.githubusercontent.com/frp-bypass/professional/main"
-$RELEASES_API = "https://api.github.com/repos/frp-bypass/professional/releases/latest"
+$GITHUB_REPO = "https://github.com/joseook/frp-bypass-software.git"
+$RAW_BASE = "https://raw.githubusercontent.com/joseook/frp-bypass-software/main"
+$RELEASES_API = "https://api.github.com/repos/joseook/frp-bypass-software/releases/latest"
 
 # Cores para output
 function Write-ColorOutput($ForegroundColor) {
@@ -56,7 +56,7 @@ function Request-AdminRights {
         Write-ColorOutput Yellow "🔐 Privilégios de administrador necessários para instalação completa."
         Write-ColorOutput Yellow "Relançando como administrador..."
         
-        $arguments = "-NoProfile -ExecutionPolicy Bypass -Command `"& {irm $RAW_BASE/install.ps1 | iex}`""
+        $arguments = "-NoProfile -ExecutionPolicy Bypass -Command `"& {irm https://raw.githubusercontent.com/joseook/frp-bypass-software/main/install.ps1 | iex}`""
         Start-Process PowerShell -ArgumentList $arguments -Verb RunAs
         exit
     }
@@ -176,14 +176,14 @@ function Download-Project {
         } else {
             # Fallback para download ZIP
             Write-ColorOutput Blue "  Baixando arquivo ZIP..."
-            $zipUrl = "$GITHUB_REPO/archive/refs/heads/main.zip"
+            $zipUrl = "https://github.com/joseook/frp-bypass-software/archive/refs/heads/main.zip"
             $zipPath = "$env:TEMP\frp-bypass-pro.zip"
             
             Invoke-WebRequest -Uri $zipUrl -OutFile $zipPath -UseBasicParsing
             Expand-Archive -Path $zipPath -DestinationPath "$env:TEMP\frp-extract" -Force
             
             # Mover conteúdo para diretório de instalação
-            $extractedPath = "$env:TEMP\frp-extract\professional-main"
+            $extractedPath = "$env:TEMP\frp-extract\frp-bypass-software-main"
             if (Test-Path $extractedPath) {
                 Get-ChildItem $extractedPath | Move-Item -Destination $InstallPath
             }

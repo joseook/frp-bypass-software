@@ -256,9 +256,9 @@ function Install-GUIDependencies {
     
     try {
         Write-ColorOutput Blue "  Instalando pacotes Node.js..."
-        npm install --silent 2>&1 | Out-Null
+        npm install --legacy-peer-deps --silent 2>&1 | Out-Null
         
-        Write-ColorOutput Green "  ✓ Dependências GUI instaladas"
+        Write-ColorOutput Green "  âœ“ DependÃªncias GUI instaladas"
     } catch {
         Write-ColorOutput Red "  ❌ Erro ao instalar dependências GUI: $($_.Exception.Message)"
         $Script:SkipGUI = $true
@@ -330,8 +330,8 @@ Write-Host "📍 Diretório: `$PWD" -ForegroundColor Gray
 
 # Verificar se node_modules existe
 if (-not (Test-Path "node_modules")) {
-    Write-Host "📦 Instalando dependências da GUI..." -ForegroundColor Yellow
-    npm install
+    Write-Host "ðŸ“¦ Instalando dependÃªncias da GUI..." -ForegroundColor Yellow
+    npm install --legacy-peer-deps
 }
 
 # Verificar se build existe (para produção)

@@ -28,9 +28,13 @@ function createWindow() {
       enableRemoteModule: false,
       preload: path.join(__dirname, 'preload.js')
     },
-    icon: path.join(__dirname, '../assets/icon.png'),
+    icon: path.join(
+      __dirname,
+      '../assets',
+      process.platform === 'win32' ? 'icon.ico' : (process.platform === 'darwin' ? 'icon.icns' : 'icon.png')
+    ),
     titleBarStyle: 'default',
-    show: false // Não mostra até estar pronta
+    show: false // NÃ£o mostra atÃ© estar pronta
   });
 
   // Carrega a aplicação React

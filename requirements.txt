@@ -5,7 +5,7 @@
 # Comunicação USB e dispositivos Android
 pyusb>=1.2.1
 adb-shell>=0.4.4
-python-adb>=0.3.0
+# python-adb>=0.3.0  # REMOVIDO: não existe no PyPI, usar adb-shell
 
 # Segurança e criptografia
 cryptography>=41.0.0

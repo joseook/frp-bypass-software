@@ -320,8 +320,33 @@ function Create-GUILauncher {
         $guiLauncherPath = "$InstallPath\launch-gui.ps1"
         $guiLauncher = @"
 # FRP Bypass Professional - GUI Launcher
+param([switch]`$Debug)
+
+`$ErrorActionPreference = "Continue"
 Set-Location "$InstallPath\gui"
-npm start
+
+Write-Host "🎨 Iniciando FRP Bypass Professional GUI..." -ForegroundColor Cyan
+Write-Host "📍 Diretório: `$PWD" -ForegroundColor Gray
+
+# Verificar se node_modules existe
+if (-not (Test-Path "node_modules")) {
+    Write-Host "📦 Instalando dependências da GUI..." -ForegroundColor Yellow
+    npm install
+}
+
+# Verificar se build existe (para produção)
+if (-not (Test-Path "build") -and -not `$Debug) {
+    Write-Host "🏗️ Construindo aplicação..." -ForegroundColor Yellow
+    npm run react-build
+}
+
+# Iniciar aplicação
+Write-Host "🚀 Abrindo interface..." -ForegroundColor Green
+if (`$Debug) {
+    npm run dev
+} else {
+    npm start
+}
 "@
         $guiLauncher | Out-File -FilePath $guiLauncherPath -Encoding UTF8
         

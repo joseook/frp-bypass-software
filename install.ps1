@@ -9,7 +9,7 @@ param(
 )
 
 # Configurações
-$ErrorActionPreference = "Stop"
+$ErrorActionPreference = "Continue"  # Mudado de "Stop" para "Continue" para evitar fechamento abrupto
 $ProgressPreference = "SilentlyContinue"
 
 # URLs do projeto
@@ -172,7 +172,17 @@ function Download-Project {
         # Tentar usar git primeiro
         if (Get-Command git -ErrorAction SilentlyContinue) {
             Write-ColorOutput Blue "  Clonando repositório..."
-            git clone $GITHUB_REPO $InstallPath 2>&1 | Out-Null
+            Write-ColorOutput Yellow "  Isso pode levar alguns minutos..."
+            
+            # Executar git clone com melhor tratamento de erros
+            $gitOutput = git clone $GITHUB_REPO $InstallPath 2>&1
+            $gitExitCode = $LASTEXITCODE
+            
+            if ($gitExitCode -ne 0) {
+                Write-ColorOutput Red "  ❌ Git clone falhou (código: $gitExitCode)"
+                Write-ColorOutput Yellow "  Tentando método alternativo..."
+                throw "Git clone failed with exit code $gitExitCode"
+            }
         } else {
             # Fallback para download ZIP
             Write-ColorOutput Blue "  Baixando arquivo ZIP..."
